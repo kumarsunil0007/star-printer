@@ -8,6 +8,11 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { PrinterService } from './services/printer/printer.service';
+import { ReceiptService } from './services/receipt/receipt.service';
+import { AlertService } from './services/alert/alert.service';
+import { Camera } from '@ionic-native/camera/ngx';
+import { StarPRNT } from '@ionic-native/star-prnt/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,8 +21,15 @@ import { AppRoutingModule } from './app-routing.module';
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
+    PrinterService,
+    ReceiptService,
+    AlertService,
+    StarPRNT,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
+
 export class AppModule {}

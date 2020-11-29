@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">printer-demo</string>
+    <string name="title_activity_main">printer-demo</string>
+    <string name="package_name">com.betasoft.starprinter</string>
+    <string name="custom_url_scheme">com.betasoft.starprinter</string>
+</resources>

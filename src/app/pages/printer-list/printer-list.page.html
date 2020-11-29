@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>Search Port</ion-title>
+      <ion-buttons slot="end">
+        <ion-button  (click)="portDiscovery(portType)">
+          <ion-icon slot="icon-only" name="refresh"></ion-icon>
+        </ion-button>
+      
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-item-group allow-empty-selection="false"  name="selectedPrinter">
+        <ion-item-divider color="light">Printers</ion-item-divider>
+  <ion-item *ngFor="let printer of printerList" (ionSelect)="selected()">
+    <ion-label>
+      <h2>{{printer.modelName}}</h2>
+      <p>{{printer.portName}} ({{printer.macAddress}})</p>
+    </ion-label>
+      <!-- <ion-radio [value]="printer" (ionSelect)="selected()" name="selectedPrinter" [(ngModel)]="selectedPrinter"></ion-radio> -->
+      <ion-radio slot="start" name="{{printer}}" [value]="printer" 
+     ></ion-radio>
+  </ion-item>
+  <ion-item *ngIf="!printerList.length">
+    <ion-label>
+      <h2>No Printer found</h2>
+      </ion-label>
+  </ion-item>
+  </ion-item-group>
+
+</ion-content>
