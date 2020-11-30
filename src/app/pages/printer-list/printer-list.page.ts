@@ -14,7 +14,7 @@ import { Printers } from '@ionic-native/star-prnt/ngx';
 
 export class PrinterListPage implements OnInit {
   portType: string;
-  printerList: Printers = [];
+  printerList: Printers = [{portName: 'BT:00:11:62:17:E1:74', macAddress: '00:11:62:17:E1:74', modelName: 'BT:TSP100-B1220'}];
   selectedPrinter: any = {};
 
    constructor(
@@ -32,6 +32,7 @@ export class PrinterListPage implements OnInit {
 
   ngOnInit(){
     this.activatedRoute.queryParams.subscribe(params => {
+      console.log('params', params);
       if (params.portType){
           this.portType = params.portType;
       }
@@ -53,7 +54,10 @@ export class PrinterListPage implements OnInit {
       loading.dismiss();
       this.printerList = [];
       this.printerList = Printers;
-      console.log(this.printerList);
+      if (this.printerList.length){
+        this.selectedPrinter.printer = this.printerList[0];
+      }
+      console.log('Printers List ', this.printerList);
     })
     .catch(error => {
       loading.dismiss();
@@ -65,6 +69,7 @@ export class PrinterListPage implements OnInit {
      * Get the emulation type for a particular printer model.
      */
   async selected(){
+    console.log('clicked', this.selectedPrinter.printer);
     const alert = await this.alertCtrl.create({
     header : 'Confirm. What is your printer?',
     inputs : [
@@ -94,7 +99,9 @@ export class PrinterListPage implements OnInit {
    'Cancel',
   {
       text: 'OK',
-      handler: emulation => {
+      handler: async (emulation) => {
+        console.log('emulation', emulation);
+        await alert.dismiss();
         this.savePrinter(emulation);
       }
     }]});
@@ -108,5 +115,9 @@ export class PrinterListPage implements OnInit {
     }else{
       alert('Please select the printer ');
     }
+  }
+
+  selectPrinter(evt){
+    alert('Here');
   }
 }
