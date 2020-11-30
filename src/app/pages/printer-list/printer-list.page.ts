@@ -28,8 +28,6 @@ export class PrinterListPage implements OnInit {
 
   }
 
-
-
   ngOnInit(){
     this.activatedRoute.queryParams.subscribe(params => {
       console.log('params', params);

@@ -19,7 +19,7 @@
     <ion-list-header>
       <ion-label>Printers</ion-label>
     </ion-list-header>
-      <ion-item *ngFor="let printer of printerList; let i = index"  >
+      <ion-item *ngFor="let printer of printerList; let i = index"  lines="none">
         <ion-label>
           <h2>{{printer.modelName}}</h2>
           <p>{{printer.portName}} ({{printer.macAddress}})</p>
@@ -27,10 +27,10 @@
           <!-- <ion-radio [value]="printer"  name="selectedPrinter" [(ngModel)]="selectedPrinter"></ion-radio> -->
           <ion-radio slot="start" [value]="printer" (ionSelect)="selected()"></ion-radio>
       </ion-item>
-    <ion-item *ngIf="!printerList.length">
+    <ion-item *ngIf="!printerList.length" lines="none">
       <ion-label>
         <h2>No Printer found</h2>
-        </ion-label>
+      </ion-label>
     </ion-item>
   </ion-radio-group>
 </ion-list>

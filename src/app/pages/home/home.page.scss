@@ -1,0 +1,32 @@
+ion-item-divider {
+    background: #f1f1f1;
+    padding:8px 16px;
+    font-weight: 500;
+    font-size: 15px;
+    border-bottom: 0px;
+    letter-spacing: 0.6px;
+}
+.dest_device{
+    ul{
+        padding-left:0;
+        list-style: none;
+        margin:0;
+        padding:10px 0;
+        li{
+            list-style: none;
+            p{
+                font-size: 14px;
+                line-height: 34px;
+            }
+        }
+    }
+}
+ion-item{
+    p{
+        font-size: 14px;
+        margin: 0;
+    }
+}
+ion-list{
+    padding-top:0px !important;
+}

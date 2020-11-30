@@ -1,0 +1,30 @@
+ion-list{
+    padding-top:0 !important;
+}
+ion-item-divider {
+    background: #f1f1f1;
+    padding:8px 16px;
+    font-weight: 500;
+    font-size: 15px;
+    border-bottom: 0px;
+    letter-spacing: 0.6px;
+}
+ion-item{
+        font-size: 14px;
+        margin: 0;
+        font-family: Poppins-Regular;
+        strong{
+            font-family: Poppins-SemiBold;
+            color: #6b6b6b;
+        }
+}
+.blinking{
+    animation:blinkingText 1.2s infinite;
+}
+@keyframes blinkingText{
+    0%{     color: #000;    }
+    49%{    color: #000; }
+    60%{    color: transparent; }
+    99%{    color:transparent;  }
+    100%{   color: #000;    }
+}
