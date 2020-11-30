@@ -14,7 +14,7 @@ import { Printers } from '@ionic-native/star-prnt/ngx';
 
 export class PrinterListPage implements OnInit {
   portType: string;
-  printerList: Printers = [{portName: 'BT:00:11:62:17:E1:74', macAddress: '00:11:62:17:E1:74', modelName: 'BT:TSP100-B1220'}];
+  printerList: Printers = []; // [{portName: 'BT:00:11:62:17:E1:74', macAddress: '00:11:62:17:E1:74', modelName: 'BT:TSP100-B1220'}];
   selectedPrinter: any = {};
 
    constructor(
