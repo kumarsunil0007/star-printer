@@ -17,105 +17,106 @@ export class PrinterListPage implements OnInit {
   printerList: Printers = []; // [{portName: 'BT:00:11:62:17:E1:74', macAddress: '00:11:62:17:E1:74', modelName: 'BT:TSP100-B1220'}];
   selectedPrinter: any = {};
 
-   constructor(
-     public router: Router,
-     public alertCtrl: AlertController,
-     private printerService: PrinterService,
-     private alertService: AlertService,
-     private activatedRoute: ActivatedRoute,
-     private navCtrl: NavController
-     ) {
+  constructor(
+    public router: Router,
+    public alertCtrl: AlertController,
+    private printerService: PrinterService,
+    private alertService: AlertService,
+    private activatedRoute: ActivatedRoute,
+    private navCtrl: NavController
+  ) {
 
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.activatedRoute.queryParams.subscribe(params => {
       console.log('params', params);
-      if (params.portType){
-          this.portType = params.portType;
+      if (params.portType) {
+        this.portType = params.portType;
       }
-      if (this.portType != null){
-      this.portDiscovery(this.portType);
-    }else{
-      this.portDiscovery('All');
-    }
+      if (this.portType != null) {
+        this.portDiscovery(this.portType);
+      } else {
+        this.portDiscovery('All');
+      }
     });
 
   }
 
-  async portDiscovery(portType: string){
+  async portDiscovery(portType: string) {
     const loading = await this.alertService.createLoading('Communicating');
     loading.present();
     this.printerService.portDiscovery(portType)
-    // tslint:disable-next-line:no-shadowed-variable
-    .then(Printers => {
-      loading.dismiss();
-      this.printerList = [];
-      this.printerList = Printers;
-      if (this.printerList.length){
-        this.selectedPrinter.printer = this.printerList[0];
-      }
-      console.log('Printers List ', this.printerList);
-    })
-    .catch(error => {
-      loading.dismiss();
-      alert('Error finding printers ' + error);
-    });
+      // tslint:disable-next-line:no-shadowed-variable
+      .then(Printers => {
+        loading.dismiss();
+        this.printerList = [];
+        this.printerList = Printers;
+        if (this.printerList.length) {
+          this.selectedPrinter.printer = this.printerList[0];
+        }
+        console.log('Printers List ', this.printerList);
+      })
+      .catch(error => {
+        loading.dismiss();
+        alert('Error finding printers ' + error);
+      });
   }
 
-    /**
-     * Get the emulation type for a particular printer model.
-     */
-  async selected(){
+  /**
+   * Get the emulation type for a particular printer model.
+   */
+  async selected() {
     console.log('clicked', this.selectedPrinter.printer);
     const alert = await this.alertCtrl.create({
-    header : 'Confirm. What is your printer?',
-    inputs : [
-      { type: 'radio', name: 'emulation', label: 'mPOP', value: 'StarPRNT' },
-      { type: 'radio', name: 'emulation', label: 'FVP10', value: 'StarLine' },
-      { type: 'radio', name: 'emulation', label: 'TSP100', value: 'StarGraphic' },
-      { type: 'radio', name: 'emulation', label: 'TSP650II', value: 'StarLine' },
-      { type: 'radio', name: 'emulation', label: 'TSP650II', value: 'StarLine' },
-      { type: 'radio', name: 'emulation', label: 'TSP700II', value: 'StarLine' },
-      { type: 'radio', name: 'emulation', label: 'TSP800II', value: 'StarLine' },
-      { type: 'radio', name: 'emulation', label: 'SP700', value: 'StarDotImpact' },
-      { type: 'radio', name: 'emulation', label: 'SM-S210i', value: 'EscPosMobile' },
-      { type: 'radio', name: 'emulation', label: 'SM-S220i', value: 'EscPosMobile' },
-      { type: 'radio', name: 'emulation', label: 'SM-S230i', value: 'EscPosMobile' },
-      { type: 'radio', name: 'emulation', label: 'SM-T300i/T300', value: 'EscPosMobile' },
-      { type: 'radio', name: 'emulation', label: 'SM-T400i', value: 'EscPosMobile' },
-      { type: 'radio', name: 'emulation', label: 'SM-L200', value: 'StarPRNT' },
-      { type: 'radio', name: 'emulation', label: 'SM-L300', value: 'StarPRNT' },
-      { type: 'radio', name: 'emulation', label: 'BSC10', value: 'EscPos' },
-      { type: 'radio', name: 'emulation', label: 'SM-S210i StarPRNT', value: 'StarPRNT' },
-      { type: 'radio', name: 'emulation', label: 'SM-S220i StarPRNT', value: 'StarPRNT' },
-      { type: 'radio', name: 'emulation', label: 'SM-S230i StarPRNT', value: 'StarPRNT' },
-      { type: 'radio', name: 'emulation', label: 'SM-T300i/T300 StarPRNT', value: 'StarPRNT' },
-      { type: 'radio', name: 'emulation', label: 'SM-T400i StarPRNT', value: 'StarPRNT' }
-    ],
-    buttons: [
-   'Cancel',
-  {
-      text: 'OK',
-      handler: async (emulation) => {
-        console.log('emulation', emulation);
-        await alert.dismiss();
-        this.savePrinter(emulation);
-      }
-    }]});
+      header: 'Confirm. What is your printer?',
+      inputs: [
+        { type: 'radio', name: 'emulation', label: 'mPOP', value: 'StarPRNT' },
+        { type: 'radio', name: 'emulation', label: 'FVP10', value: 'StarLine' },
+        { type: 'radio', name: 'emulation', label: 'TSP100', value: 'StarGraphic' },
+        { type: 'radio', name: 'emulation', label: 'TSP650II', value: 'StarLine' },
+        { type: 'radio', name: 'emulation', label: 'TSP650II', value: 'StarLine' },
+        { type: 'radio', name: 'emulation', label: 'TSP700II', value: 'StarLine' },
+        { type: 'radio', name: 'emulation', label: 'TSP800II', value: 'StarLine' },
+        { type: 'radio', name: 'emulation', label: 'SP700', value: 'StarDotImpact' },
+        { type: 'radio', name: 'emulation', label: 'SM-S210i', value: 'EscPosMobile' },
+        { type: 'radio', name: 'emulation', label: 'SM-S220i', value: 'EscPosMobile' },
+        { type: 'radio', name: 'emulation', label: 'SM-S230i', value: 'EscPosMobile' },
+        { type: 'radio', name: 'emulation', label: 'SM-T300i/T300', value: 'EscPosMobile' },
+        { type: 'radio', name: 'emulation', label: 'SM-T400i', value: 'EscPosMobile' },
+        { type: 'radio', name: 'emulation', label: 'SM-L200', value: 'StarPRNT' },
+        { type: 'radio', name: 'emulation', label: 'SM-L300', value: 'StarPRNT' },
+        { type: 'radio', name: 'emulation', label: 'BSC10', value: 'EscPos' },
+        { type: 'radio', name: 'emulation', label: 'SM-S210i StarPRNT', value: 'StarPRNT' },
+        { type: 'radio', name: 'emulation', label: 'SM-S220i StarPRNT', value: 'StarPRNT' },
+        { type: 'radio', name: 'emulation', label: 'SM-S230i StarPRNT', value: 'StarPRNT' },
+        { type: 'radio', name: 'emulation', label: 'SM-T300i/T300 StarPRNT', value: 'StarPRNT' },
+        { type: 'radio', name: 'emulation', label: 'SM-T400i StarPRNT', value: 'StarPRNT' }
+      ],
+      buttons: [
+        'Cancel',
+        {
+          text: 'OK',
+          handler: async (emulation) => {
+            console.log('emulation', emulation);
+            await alert.dismiss();
+            this.savePrinter(emulation);
+          }
+        }]
+    });
     await alert.present();
   }
 
-  savePrinter(emulation){
-    if (this.selectedPrinter.printer){
-    this.printerService.saveDefaultPrinter(this.selectedPrinter.printer, emulation);
-    this.navCtrl.back();
-    }else{
+  savePrinter(emulation) {
+    if (this.selectedPrinter.printer) {
+      this.printerService.saveDefaultPrinter(this.selectedPrinter.printer, emulation);
+      this.navCtrl.back();
+    } else {
       alert('Please select the printer ');
     }
   }
 
-  selectPrinter(evt){
+  selectPrinter(evt) {
     alert('Here');
   }
 }

@@ -3,16 +3,16 @@
     <ion-title>Star Printer</ion-title>
   </ion-toolbar>
 </ion-header>
- 
+
 <ion-content>
   <ion-list>
     <ion-item-group>
       <ion-item-divider color="light">Destination Device</ion-item-divider>
 
-      <ion-item class="dest_device" *ngIf="defaultPrinter?.portName" (click)="printerTypePopup()" lines="none">
+      <ion-item class="dest_device" *ngIf="defaultPrinter?.portName" lines="none">
         <ul>
           <li>
-            <p><strong>Modal Name : </strong>{{defaultPrinter?.modelName}}</p>
+            <p><strong>Modal Name : </strong>{{defaultPrinter?.modelName}} </p>
           </li>
           <li>
             <p><strong>MacAddress : </strong>{{defaultPrinter?.portName}} ({{defaultPrinter?.macAddress}})</p>
@@ -26,6 +26,14 @@
         <p>Select a printer... </p>
       </ion-item>
     </ion-item-group>
+
+    <ion-item-group>
+      <ion-item-divider color="light"> Test Operations</ion-item-divider>
+    </ion-item-group>
+    <ion-item (click)="printCustomerReceipt()" lines="none">
+      <p>Customer Receipt</p>
+    </ion-item>
+
     <ion-item-group>
       <ion-item-divider color="light"> Printer SMPort StarIO-SDK Sample</ion-item-divider>
     </ion-item-group>
@@ -82,4 +90,5 @@
     </ion-item>
 
   </ion-list>
+
 </ion-content>
